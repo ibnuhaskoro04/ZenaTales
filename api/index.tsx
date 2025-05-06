@@ -1,7 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import { registerRoutes } from "../server/routes";
-import { serveStatic, log } from "../server/vite"; // Tidak butuh setupVite (khusus dev)
-import serverless from "serverless-http";
+import { serveStatic, log } from "../server/vite";
 
 const app = express();
 
@@ -35,10 +34,9 @@ app.use((req, res, next) => {
   next();
 });
 
-(async () => {
-  await registerRoutes(app);
-  serveStatic(app);
-})();
+// Async setup
+await registerRoutes(app);
+serveStatic(app);
 
-// Export sebagai handler serverless
-export const handler = serverless(app);
+// ✅ Export default app (bukan handler!)
+export default app;
