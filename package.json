@@ -8,7 +8,12 @@
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "check": "tsc",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "dev:client": "cd client && vite",
+    "dev:server": "cd server && ts-node index.ts",
+    "build:client": "cd client && vite build",
+    "build:server": "cd server && tsc",
+    "vercel-build": "npm run build:client && npm run build:server"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
